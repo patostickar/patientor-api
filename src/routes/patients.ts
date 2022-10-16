@@ -9,21 +9,21 @@ router.get('/', (_req, res) => {
   res.send(patientsService.getPatients());
 });
 
-router.get('/:id', (req, res) => {
-  const id = req.params.id;
-  res.send(patientsService.getPatientsById(id));
+router.get('/:id', (req, res, next) => {
+  try {
+    const id = req.params.id;
+    res.send(patientsService.getPatientsById(id));
+  } catch (error) {
+    next(error);
+  }
 });
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   try {
     const newPatient = validateNewPatientType(req.body as NewPatient);
     res.json(patientsService.addPatients(newPatient));
-  } catch (error: unknown) {
-    let errorMessage = 'Something went wrong.';
-    if (error instanceof Error) {
-      errorMessage += ' Error: ' + error.message;
-    }
-    res.status(400).send(errorMessage);
+  } catch (error) {
+    next(error);
   }
 });
 
