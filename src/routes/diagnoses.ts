@@ -7,4 +7,13 @@ router.get('/', (_req, res) => {
   res.send(diagnoseService.getDiagnoses());
 });
 
+router.get('/:code', (req, res, next) => {
+  try {
+    const code = req.params.code;
+    res.send(diagnoseService.getDiagnoseByCode(code));
+  } catch (error) {
+    next(error);
+  }
+});
+
 export default router;
