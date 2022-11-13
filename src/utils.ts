@@ -1,12 +1,13 @@
-import { NewPatientEntry, Gender } from './types';
+import { NewPatient, Gender } from './types';
 
-const validateNewPatientEntryType = (patient: NewPatientEntry): NewPatientEntry => {
+const validateNewPatientType = (patient: NewPatient): NewPatient => {
   const newPatient = {
     name: parseName(patient.name),
     dateOfBirth: parseDateOfBirth(patient.dateOfBirth),
     ssn: parseSsn(patient.ssn),
     gender: parseGender(patient.gender),
     occupation: parseOccupation(patient.occupation),
+    entries: patient.entries,
   };
 
   return newPatient;
@@ -56,4 +57,8 @@ const parseOccupation = (occupation: unknown): string => {
   return occupation;
 };
 
-export default validateNewPatientEntryType;
+// const parseEntries = (entries: unknown): Array<Entry> => {
+//   if(!entries || )
+// }
+
+export default validateNewPatientType;
