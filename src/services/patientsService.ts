@@ -15,7 +15,9 @@ const getPatients = (): Array<PublicPatient> => {
 };
 
 const getPatientsById = (id: string): Patient | undefined => {
-  return patients.find((patient) => patient.id === id);
+  const patient = patients.find((patient) => patient.id === id);
+  console.log(patient);
+  return patient;
 };
 
 const addPatients = (entry: NewPatient): Patient => {
